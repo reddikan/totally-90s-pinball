@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.reddikan.totally90spinball'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.reddikan.totally90spinball'
+        minSdk 26
+        targetSdk 34
+        versionCode Integer.parseInt(System.getenv('BUILD_NUMBER') ?: '1')
+        versionName "1.0." + (System.getenv('BUILD_NUMBER') ?: '1')
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('t90p.keystore')
+            storePassword 't90pinball'
+            keyAlias 't90p'
+            keyPassword 't90pinball'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
